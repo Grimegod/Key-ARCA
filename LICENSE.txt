@@ -1,0 +1,59 @@
+FREEWARE LICENSE 1.0
+Effective date: 2026-10-26
+
+Application: ARCA archivator
+Scope: the original application code and materials supplied with this license.
+Copyright remains with the copyright holder(s) of the original application.
+All rights not expressly granted below are reserved.
+
+1. FREE USE
+
+You may download, install, copy and use this version of the application without
+paying a license fee, for personal, educational, nonprofit and commercial use,
+on any number of computers. There is no trial expiration or activation fee.
+These terms apply to versions distributed with this license; they do not make
+promises about other products or future versions distributed under other terms.
+
+2. REDISTRIBUTION
+
+You may share the complete binary distribution without charging a license fee,
+provided that the original application binaries, this license, the third-party
+notices and the required third-party source packages are retained. You must not
+claim to be the original publisher or claim endorsement without permission.
+Replacing or modifying third-party components as allowed by their own licenses
+is expressly permitted and is not prohibited by this section.
+
+3. ORIGINAL APPLICATION SOURCE
+
+This is a freeware license for use of the application, not an open-source
+license for the original application code. No right to publish, sublicense or
+distribute that original source code or modified original application binaries
+is granted, unless separately authorized by its copyright holder(s).
+The owner's private source backup is not part of the public distribution.
+
+4. THIRD-PARTY RIGHTS
+
+Third-party components and their source code retain their own licenses. This
+license does not limit any rights those licenses grant. In particular, you may
+modify and replace the LGPL libraries with interface-compatible versions and
+reverse engineer the application as needed to debug modifications to those
+libraries. Redistribution rights and source obligations for those components
+are governed by their respective licenses. See THIRD-PARTY-NOTICES.md.
+No restriction here overrides rights that applicable law does not permit the
+copyright holder to restrict.
+
+5. WARRANTY AND LIABILITY
+
+To the extent permitted by applicable law, the application is provided "AS IS",
+without warranties, including implied warranties of merchantability, fitness
+for a particular purpose or noninfringement. To the extent permitted by law,
+the copyright holder(s) are not liable for losses or damages arising from use
+of the application. Rights and liabilities that cannot lawfully be excluded
+or limited remain unaffected. Keep independent backups of important data.
+
+6. OWNERSHIP
+
+Use or redistribution under this license does not transfer ownership of the
+original application or grant rights to its name, logo or other branding beyond
+identifying a permitted copy. Archives and other user files are not licensed
+under these terms merely because the application processes them.
