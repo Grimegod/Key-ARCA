@@ -78,7 +78,7 @@ No personal user files were used. Corpus contents and frozen original
 application source inputs are not included in the public release.
 
 The owner can reproduce a run with `tools/prepare_benchmark.py`, then build
-`tools/ArcaBench/ArcaBench.csproj` and execute it with the project root as
+`tools/KeyArcaBench/KeyArcaBench.csproj` and execute it with the project root as
 its argument. Re-preparing after source changes creates a different source
 fixture; compare its inventory before interpreting different results.
 

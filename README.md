@@ -1,20 +1,18 @@
-![ARCA archive chest logo](arca-logo.png)
-
-# ARCA archivator 0.2.0
+# Key-ARCA 0.2.1
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download ARCA archivator 0.2.0 for Windows x64](https://github.com/Grimegod/ARCA-archivator/releases/download/v0.2.0/ARCA-archivator-0.2.0-win-x64.zip)
+[Download Key-ARCA 0.2.1 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.2.1/Key-ARCA-0.2.1-win-x64.zip)
 
 This release is a **portable ZIP**, not an installer. It includes the required
 .NET runtime. You do not need Git, Visual Studio or a separate .NET installation.
 
-1. Download `ARCA-archivator-0.2.0-win-x64.zip` from the release's **Assets**.
+1. Download `Key-ARCA-0.2.1-win-x64.zip` from the release's **Assets**.
 2. Right-click the ZIP and choose **Extract All**.
-3. Open the extracted folder and run **ArcaArchivator.exe**.
+3. Open the extracted folder and run **Key-ARCA.exe**.
 4. Keep all extracted files together. Create a shortcut to the executable if desired.
 
 To remove the portable application, close it and delete its application folder.
@@ -40,13 +38,15 @@ use the application.
 
 ## Preview status and limitations
 
-Version 0.2.0 is an **unsigned preview**. Windows may show a publisher or
+Version 0.2.1 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
-The ARCA format is experimental and currently requires ARCA archivator to open.
+The application is now named **Key-ARCA**. Existing `.arca` archives keep their
+extension and format and remain supported, including encrypted archives.
+The ARCA format is experimental and currently requires Key-ARCA to open.
 Keep originals or independent backups. It does **not** consistently compress
-better than optimized 7z. The [format description](ARCA-FORMAT.md) and
-[complete compression measurements](COMPRESSION-BENCHMARKS.md) explain its
+better than optimized 7z. The [format description](https://github.com/Grimegod/Key-ARCA/blob/main/ARCA-FORMAT.md) and
+[complete compression measurements](https://github.com/Grimegod/Key-ARCA/blob/main/COMPRESSION-BENCHMARKS.md) explain its
 behavior and limits, including cases where 7z is smaller.
 
 This version does not yet support RAR/ISO extraction, split/join volumes,
@@ -78,8 +78,6 @@ Open **License & credits** in the application to read the included notices.
 
 Questions, feedback and bug reports: **[FFFNewsNow@gmail.com](mailto:FFFNewsNow@gmail.com)**.
 
-You can also [report an issue](https://github.com/Grimegod/ARCA-archivator/issues).
+You can also [report an issue](https://github.com/Grimegod/Key-ARCA/issues).
 For a bug, include the application version, Windows version, archive format and
 steps to reproduce. Do not attach confidential files or passwords to public issues.
-
-![ARCA archivator interface](screenshot.png)

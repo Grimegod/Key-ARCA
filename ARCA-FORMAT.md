@@ -1,6 +1,6 @@
 # ARCA v1 — experimental format specification
 
-ARCA archivator 0.2 introduces an independent `.arca` container for exact file
+Key-ARCA 0.2 introduces an independent `.arca` container for exact file
 contents and directory structure. The format is experimental. Version 1 readers
 reject other versions; an incompatible revision must use a new version number.
 ZIP and 7z remain available for interchange with other applications.

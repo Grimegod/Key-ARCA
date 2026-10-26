@@ -1,7 +1,7 @@
 FREEWARE LICENSE 1.0
 Effective date: 2026-10-26
 
-Application: ARCA archivator
+Application: Key-ARCA
 Scope: the original application code and materials supplied with this license.
 Copyright remains with the copyright holder(s) of the original application.
 All rights not expressly granted below are reserved.
