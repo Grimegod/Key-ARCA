@@ -1,52 +1,54 @@
-# Key-ARCA 0.3.0 — RAR/ISO, verified parts and archive recovery
+# Key-ARCA 0.4.0 — WinRAR volumes, installer and more readers
 
 ## New
 
-- Read/extract single-file RAR4/RAR5, including supported encrypted data and
-  encrypted headers; read ISO9660/Joliet and readable UDF images.
-- Split existing archives/files by MiB per part or a chosen count. Join from
-  the manifest or any numbered part. Each part and the whole saved file are
-  verified with SHA-256. Originals and parts are retained; output uses a new folder.
-- Recover intact files from damaged ZIP/7z/RAR, create a new verified ZIP and
-  write a recovery report. ZIP local headers can be scanned when central
-  metadata is unreadable, subject to documented limits.
-- New Split & join tab and Recover / repair action, translated into all eleven
-  interface languages. Existing language preferences and branding are retained.
-
-## Boundaries that matter
-
-Key-ARCA parts use Key-ARCA.parts.json and numbered .arcapart files. Send every
-file in the parts folder. They are byte parts, not native WinRAR volumes.
-Native multipart RAR sets are rejected. SHA-256 checks detect accidental
-corruption; an unsigned manifest does not authenticate its sender.
-
-Recovery saves **unencrypted** files and Recovered.zip in a new folder, even
-for encrypted input. It retains only decodable files passing integrity and
-size checks. It does not reconstruct missing bytes or use recovery records.
-7z/RAR recovery needs readable metadata; ZIP fallback supports Store/Deflate
-with known 32-bit sizes. ISO/ARCA repair is not included. Read Recovery-report.json;
-a partial result is labelled and unreadable metadata can hide uncounted files.
-The repaired ZIP uses Store and may be larger. ISO verification reports
-readability, since ISO has no per-file content checksums.
+- Open multipart WinRAR archives directly. Keep all parts in one folder and
+  select any `.part1.rar` or `.part01.rar` part. The first and subsequent parts
+  are found automatically, including solid sets. Missing parts are reported
+  by filename; incomplete output is discarded.
+- Windows per-user installer: **Key-ARCA-0.4.0-Setup-x64.exe**. Includes .NET,
+  Start menu shortcut, optional desktop shortcut, updates and Windows Installed
+  apps uninstall. No administrator access is needed. User archives/preferences
+  are retained on removal, and nonempty unrelated folders are refused.
+- Read/extract TAR, GZIP, BZIP2 and XZ. Compressed TAR files use two steps:
+  decompress `.tar.gz`/`.tgz`, then open the resulting `.tar`.
+- Keep ZIP/7z/ARCA creation, RAR/ISO reading, verified Split & join and
+  best-effort ZIP/7z/RAR recovery from 0.3.0. New status/errors are translated
+  into all eleven interface languages.
 
 ## Safety and validation
 
-Path/link/collision, actual-byte, expansion and worker limits remain enforced.
-Cancellation removes owned staging; no existing output is merged or overwritten.
-Link targets and POSIX attributes are now exposed by the patched LGPL wrapper
-for validation. Updated corresponding source is included under licenses.
+158/158 native integration/security tests passed. New independent RAR5 fixtures
+cover padded/unpadded names, selection from a middle part, missing first/middle/
+last volumes, solid sets, locked inputs and rejected external volume requests.
+TAR/GZ/BZ2/XZ tests check exact bytes, output conflicts and expansion limits;
+unsafe TAR paths, symlinks and hardlinks are rejected. Unknown BZIP2 sizes are
+shown explicitly and limited by actual bytes while reading.
 
-141/141 native integration/security tests passed, including independent public
-RAR fixtures, synthetic ISO images, damaged ZIP/7z/RAR, missing/modified parts,
-4/5/6 balanced parts and a streamed 500,000,000-byte round trip. Large temporary
-test data was removed. Portable build verification is recorded separately.
+Paths, links, collisions, expansion and worker limits remain enforced. Native
+RAR volume access uses only validated, held streams; native filesystem fallback
+is disabled. Corresponding patched LGPL dependency source is included.
+
+## Boundaries
+
+RAR and the additional formats are read-only. Key-ARCA creates its own verified
+byte parts using `Key-ARCA.parts.json` and numbered `.arcapart` files; it does
+not create WinRAR volumes. Send the manifest and every part. SHA-256 detects
+corruption but does not authenticate the sender.
+
+Recovery retains decodable intact files and creates an **unencrypted** new ZIP
+and report, even from encrypted input. It does not reconstruct missing bytes
+or use WinRAR recovery records. Solid-block damage can affect several files.
+ISO/ARCA repair is not included. Read `Recovery-report.json`.
+ISO and TAR verification report readability rather than per-file checksums.
 
 ## Download
 
-Download **Key-ARCA-0.3.0-win-x64.zip**, extract all files and run **Key-ARCA.exe**.
-This remains an unsigned portable Windows 10/11 x64 freeware preview, with .NET
-included. No installer or automatic updater is included. The original source
-remains proprietary and private. SHA256SUMS.txt contains the public ZIP checksum.
-Full instructions: docs/ARCHIVE-TOOLS.md and README.md in the package.
+Use **Key-ARCA-0.4.0-Setup-x64.exe**, or extract all files from the portable
+**Key-ARCA-0.4.0-win-x64.zip** and run **Key-ARCA.exe**. Both are unsigned
+Windows 10/11 x64 freeware previews; Windows may display a publisher/reputation
+warning. No automatic updater is included. The original application source
+remains proprietary and private. `SHA256SUMS.txt` contains both download hashes.
+See README.md and docs/ARCHIVE-TOOLS.md in the package for full instructions.
 
 Contact: [FFFNewsNow@gmail.com](mailto:FFFNewsNow@gmail.com).

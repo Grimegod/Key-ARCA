@@ -1,34 +1,37 @@
-# Key-ARCA 0.3.0
+# Key-ARCA 0.4.0
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download Key-ARCA 0.3.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.3.0/Key-ARCA-0.3.0-win-x64.zip)
+[Download Key-ARCA 0.4.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.0/Key-ARCA-0.4.0-Setup-x64.exe)
 
-This release is a **portable ZIP**, not an installer. It includes the required
-.NET runtime. You do not need Git, Visual Studio or a separate .NET installation.
+Choose **Key-ARCA-0.4.0-Setup-x64.exe** for the installer, or use the
+[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.0/Key-ARCA-0.4.0-win-x64.zip).
+Both include .NET; no Git, Visual Studio or separate runtime is required.
 
-1. Download `Key-ARCA-0.3.0-win-x64.zip` from the release's **Assets**.
-2. Right-click the ZIP and choose **Extract All**.
-3. Open the extracted folder and run **Key-ARCA.exe**.
-4. Keep all extracted files together. Create a shortcut to the executable if desired.
+1. Download and run **Key-ARCA-0.4.0-Setup-x64.exe** from the release Assets.
+2. Choose a dedicated application folder. Installation is per user without administrator access.
+3. Open Key-ARCA from the Start menu. A desktop shortcut is optional.
 
-To remove the portable application, close it and delete its application folder.
-Keep your own archives and extracted files. Future updates require downloading
-and extracting a new release into a separate folder; there is no automatic updater.
-The saved language is stored separately under `%LOCALAPPDATA%/Key-ARCA/Preferences`.
-Delete that folder too if you want to remove the saved preference; keep your archives.
+Install a newer release into the same folder to update. Remove the installed
+app through Windows **Installed apps**; user archives and preferences are kept.
+The installer refuses nonempty unrecognized folders and newer-version downgrades.
+The saved language is under `%LOCALAPPDATA%/Key-ARCA/Preferences`.
 
-The automatically generated **Source code** downloads on GitHub contain this
-public distribution page and documentation. Download the Windows ZIP above to
-use the application.
+For portable use, extract **all** ZIP files and open **Key-ARCA.exe**. Keep its
+DLLs, languages and licenses together. Update into a new folder; remove only
+the portable application files when finished. Keep your own archives.
+There is no automatic updater.
+
+GitHub's automatically generated **Source code** downloads contain public
+website documentation. Use Setup or the Windows ZIP to get the application.
 
 ## Features
 
 - Create, preview, verify and extract ZIP, 7z and `.arca` archives.
-- Open/extract single-file RAR4/RAR5 archives, including supported encrypted archives, and ISO images.
+- Open/extract RAR4/RAR5, including multipart WinRAR sets, plus ISO, TAR, GZ, BZ2 and XZ.
 - Split/join existing files by part size or count, with a manifest and SHA-256 checks.
 - Recover intact files from damaged ZIP/7z/RAR into a new folder, verified ZIP and report.
 - Optional AES-256 encryption. 7z and ARCA can also hide file names.
@@ -59,7 +62,7 @@ unsigned manifest does not authenticate the sender.
 
 ## Recovery and repair
 
-In **Open & extract**, choose a damaged ZIP, 7z or single-file RAR, enter its
+In **Open & extract**, choose a damaged ZIP, 7z or RAR, enter its
 password if needed, choose the destination and select **Recover / repair**.
 The new folder contains `Files/`, a verified `Recovered.zip` and
 `Recovery-report.json` with recovered/skipped entries and limitations.
@@ -77,7 +80,7 @@ A detailed guide is included as `docs/ARCHIVE-TOOLS.md` in the Windows package.
 
 ## Preview status and limitations
 
-Version 0.3.0 is an **unsigned preview**. Windows may show a publisher or
+Version 0.4.0 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
 The application is now named **Key-ARCA**. Existing `.arca` archives keep their
@@ -88,9 +91,11 @@ better than optimized 7z. The [format description](https://github.com/Grimegod/K
 [complete compression measurements](https://github.com/Grimegod/Key-ARCA/blob/main/COMPRESSION-BENCHMARKS.md) explain its
 behavior and limits, including cases where 7z is smaller.
 
-This version does not include Explorer context menus or a Windows installer.
-RAR/ISO creation, native multipart RAR sets and recovery records are not supported.
-ISO verification reports readability, since ISO has no per-file integrity checksums.
+This version does not include Explorer context menus or automatic file associations.
+RAR/ISO creation and recovery records are not supported.
+ISO and TAR verification reports readability rather than per-file content checksums.
+Keep all WinRAR parts in one folder and select any part; missing parts are named.
+Compressed TAR files require two steps: decompress .tar.gz/.tgz, then open the TAR.
 General metadata such as ACLs, alternate streams and hard-link relationships
 is not backed up. ARCA v1 also omits timestamps.
 
