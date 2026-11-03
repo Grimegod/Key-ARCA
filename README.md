@@ -1,16 +1,16 @@
-# Key-ARCA 0.2.1
+# Key-ARCA 0.2.2
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download Key-ARCA 0.2.1 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.2.1/Key-ARCA-0.2.1-win-x64.zip)
+[Download Key-ARCA 0.2.2 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.2.2/Key-ARCA-0.2.2-win-x64.zip)
 
 This release is a **portable ZIP**, not an installer. It includes the required
 .NET runtime. You do not need Git, Visual Studio or a separate .NET installation.
 
-1. Download `Key-ARCA-0.2.1-win-x64.zip` from the release's **Assets**.
+1. Download `Key-ARCA-0.2.2-win-x64.zip` from the release's **Assets**.
 2. Right-click the ZIP and choose **Extract All**.
 3. Open the extracted folder and run **Key-ARCA.exe**.
 4. Keep all extracted files together. Create a shortcut to the executable if desired.
@@ -18,6 +18,8 @@ This release is a **portable ZIP**, not an installer. It includes the required
 To remove the portable application, close it and delete its application folder.
 Keep your own archives and extracted files. Future updates require downloading
 and extracting a new release into a separate folder; there is no automatic updater.
+The saved language is stored separately under `%LOCALAPPDATA%/Key-ARCA/Preferences`.
+Delete that folder too if you want to remove the saved preference; keep your archives.
 
 The automatically generated **Source code** downloads on GitHub contain this
 public distribution page and documentation. Download the Windows ZIP above to
@@ -34,11 +36,12 @@ use the application.
 - Configurable expanded-size limit: 2, 10, 20 or 50 GiB; 20 GiB is the default.
 - English default plus Romanian, Spanish, French, German, Portuguese, Italian,
   Simplified Chinese, Japanese, Arabic and Hindi.
+- Your language choice is remembered per Windows user, including across portable updates and when the application folder is read-only. Existing portable language preferences are migrated.
 - Original archive-chest logo and optional subtle animations.
 
 ## Preview status and limitations
 
-Version 0.2.1 is an **unsigned preview**. Windows may show a publisher or
+Version 0.2.2 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
 The application is now named **Key-ARCA**. Existing `.arca` archives keep their
