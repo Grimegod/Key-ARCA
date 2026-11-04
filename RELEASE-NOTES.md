@@ -1,3 +1,42 @@
+# Key-ARCA 0.4.1 — original folder names and faster ARCA creation
+
+## Fixes
+
+- Save As suggests the original folder name for ZIP, 7z and ARCA, including
+  dots and Unicode characters. A folder named Documents.2026 produces
+  Documents.2026.arca by default. The folder name inside the archive is
+  preserved. The initial save location is beside the selected folder.
+- Selecting ARCA preserves the chosen compression profile instead of forcing
+  Smaller. Balanced is the initial choice. Smaller remains an explicit option
+  for a possible size gain at a higher processing cost.
+- Reuse read/chunk buffers across files, avoiding approximately 576 KiB of
+  repeated allocation per source file.
+- Query filesystem attributes once per ancestor instead of repeating existence
+  and attribute probes. Every ancestor is still checked; inaccessible paths
+  fail closed. Link, path, integrity, cancellation and no-overwrite checks remain.
+
+## Validation and measured scope
+
+163/163 native integration/security checks passed, including Unicode/dotted
+folder names, all three creation formats, cross-file buffer boundaries,
+bounded allocations, junctions below missing paths and existing ARCA safety
+cases.
+
+On frozen synthetic inputs, with Balanced and built-in verification in both
+versions: 2,000 small files took 25.720 s in 0.4.0 and 4.744 s in 0.4.1;
+600 text/code files took 8.176 s and 2.055 s. The resulting same-profile
+archives were byte-for-byte identical. These are single-run measurements on
+this computer, not a universal speed guarantee.
+
+Changing the previous automatic Smaller default to Balanced is a separate
+tradeoff: the tested text/code archive was 19.02% larger and the tiny-file
+archive 2.26% larger than Smaller. Both profiles remain available.
+
+ARCA v1 remains experimental and format-compatible. The application remains
+an unsigned freeware preview. No existing public release assets are replaced.
+
+---
+
 # Key-ARCA 0.4.0 — WinRAR volumes, installer and more readers
 
 ## New

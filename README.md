@@ -1,17 +1,17 @@
-# Key-ARCA 0.4.0
+# Key-ARCA 0.4.1
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download Key-ARCA 0.4.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.0/Key-ARCA-0.4.0-Setup-x64.exe)
+[Download Key-ARCA 0.4.1 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.1/Key-ARCA-0.4.1-Setup-x64.exe)
 
-Choose **Key-ARCA-0.4.0-Setup-x64.exe** for the installer, or use the
-[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.0/Key-ARCA-0.4.0-win-x64.zip).
+Choose **Key-ARCA-0.4.1-Setup-x64.exe** for the installer, or use the
+[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.1/Key-ARCA-0.4.1-win-x64.zip).
 Both include .NET; no Git, Visual Studio or separate runtime is required.
 
-1. Download and run **Key-ARCA-0.4.0-Setup-x64.exe** from the release Assets.
+1. Download and run **Key-ARCA-0.4.1-Setup-x64.exe** from the release Assets.
 2. Choose a dedicated application folder. Installation is per user without administrator access.
 3. Open Key-ARCA from the Start menu. A desktop shortcut is optional.
 
@@ -80,7 +80,7 @@ A detailed guide is included as `docs/ARCHIVE-TOOLS.md` in the Windows package.
 
 ## Preview status and limitations
 
-Version 0.4.0 is an **unsigned preview**. Windows may show a publisher or
+Version 0.4.1 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
 The application is now named **Key-ARCA**. Existing `.arca` archives keep their
@@ -126,3 +126,11 @@ Questions, feedback and bug reports: **[FFFNewsNow@gmail.com](mailto:FFFNewsNow@
 You can also [report an issue](https://github.com/Grimegod/Key-ARCA/issues).
 For a bug, include the application version, Windows version, archive format and
 steps to reproduce. Do not attach confidential files or passwords to public issues.
+
+## Creation fixes in 0.4.1
+
+Save As uses the selected folder name. ARCA starts with Balanced and keeps
+your profile choice when formats change. Smaller is optional and takes
+longer. Faster metadata checks preserve path/link protection and the
+selected-profile archive bytes. See the release notes and compression
+measurements for the synthetic test results and size/time tradeoffs.

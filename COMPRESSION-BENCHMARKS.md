@@ -94,3 +94,41 @@ SHA-256 identifiers for the measured inputs and engine:
 
 Primary references: [Canterbury corpus descriptions](https://corpus.canterbury.ac.nz/descriptions/)
 and [7z format capabilities](https://www.7-zip.org/7z.html).
+
+## Creation speed update — 0.4.1
+
+
+Key-ARCA 0.4.1 fixes archive naming and creation performance. These are targeted
+single-run measurements on frozen synthetic inputs on this Windows computer.
+Creation includes the same built-in integrity verification in both versions.
+Input inventories and hashes are retained privately under
+artifacts/creation-performance-2026-11-04. No personal files were used.
+
+| Synthetic input | Files | Input bytes | 0.4.0 Balanced | 0.4.1 Balanced | Speedup | Archive bytes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Compressed.Control | 1 | 8,388,608 | 1.422 s | 1.319 s | 1.08× | 8,391,550 |
+| Many.Small.Files | 2,000 | 662,890 | 25.720 s | 4.744 s | 5.42× | 424,646 |
+| Text.Code | 600 | 2,396,890 | 8.176 s | 2.055 s | 3.98× | 467,818 |
+
+All three same-profile archives are byte-for-byte identical before and after.
+The optimisation reuses read/chunk buffers across files and replaces repeated
+Exists/Directory.Exists/attribute queries with one attribute query per ancestor.
+Every ancestor is still checked; inaccessible paths fail closed. File/segment
+hashes, verification, encryption, worker limits and no-overwrite rules remain.
+
+## Default profile correction
+
+Selecting ARCA previously forced Smaller, which tries Brotli 11, XZ/LZMA2 and
+PPMd. It now preserves the selected profile; the initial choice is Balanced.
+Smaller remains available explicitly. The tradeoff must be stated separately
+from same-profile engine gains:
+
+| Input | Old automatic Smaller | New initial Balanced | Smaller bytes | Balanced bytes | Size tradeoff |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Compressed.Control | 14.908 s | 1.319 s | 8,391,550 | 8,391,550 | +0.00% |
+| Many.Small.Files | 26.533 s | 4.744 s | 415,260 | 424,646 | +2.26% |
+| Text.Code | 12.048 s | 2.055 s | 393,047 | 467,818 | +19.02% |
+
+These results do not establish that ARCA beats ZIP or 7z. Different data and
+disk conditions will produce different results. There was no format revision:
+ARCA v1 compatibility is retained.
