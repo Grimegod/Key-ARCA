@@ -1,3 +1,5 @@
+<div align="justify">
+
 # ARCA v1 compression measurements
 
 Measured on Windows x64 on 2026-10-26, using .NET 10.0.14 and the bundled
@@ -132,3 +134,60 @@ from same-profile engine gains:
 These results do not establish that ARCA beats ZIP or 7z. Different data and
 disk conditions will produce different results. There was no format revision:
 ARCA v1 compatibility is retained.
+
+## Bounded workflow comparison — 5 November 2026
+
+Key-ARCA 0.4.1, the bundled 7-Zip 26.05 CLI and frozen public/synthetic inputs.
+One measurement per configuration; this is a bounded exploratory baseline.
+The same file contents and logical paths were restored and SHA-256 checked
+for all 12 outputs. Existing release binaries were used without rebuilding.
+
+| Input | Method | Archive bytes | Create + integrity (s) | Extract (s) | Creation peak working set (MiB) | Extraction peak working set (MiB) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | zip-deflate-ultra | 435,772 | 1.028 | 0.093 | 10.8 | 8.8 |
+| public-text-code | 7z-lzma2-64m | 383,285 | 0.468 | 0.097 | 24.6 | 10.0 |
+| public-text-code | 7z-ppmd | 322,164 | 0.493 | 0.277 | 40.1 | 38.5 |
+| public-text-code | arca-smaller | 323,431 | 3.028 | 0.635 | 100.1 | 84.4 |
+| synthetic-small-files | zip-deflate-ultra | 51,052 | 0.146 | 0.180 | 9.1 | 8.6 |
+| synthetic-small-files | 7z-lzma2-64m | 22,478 | 0.140 | 0.180 | 10.6 | 8.6 |
+| synthetic-small-files | 7z-ppmd | 22,833 | 0.150 | 0.193 | 10.2 | 9.2 |
+| synthetic-small-files | arca-smaller | 26,765 | 1.135 | 0.924 | 65.6 | 56.4 |
+| incompressible-control | zip-deflate-ultra | 8,389,006 | 2.623 | 0.062 | 15.0 | 8.7 |
+| incompressible-control | 7z-lzma2-64m | 8,389,342 | 2.205 | 0.065 | 98.0 | 17.5 |
+| incompressible-control | 7z-ppmd | 8,541,064 | 10.076 | 5.206 | 138.5 | 137.6 |
+| incompressible-control | arca-smaller | 8,391,558 | 12.473 | 0.390 | 265.6 | 60.2 |
+
+ARCA Smaller was 0.3933% larger than the best tested 7z on the public text/code
+set, 19.0720% larger on the 128 small synthetic files, and 0.0264% larger on
+the incompressible control. These results do not show a general ARCA advantage.
+
+Configuration: ZIP Deflate Ultra; solid 7z LZMA2 Ultra with 64 MiB dictionary;
+solid 7z PPMd Ultra with engine-default PPMd settings; ARCA Smaller. Each
+compressor used one compression thread. No application Job CPU/memory caps
+were applied to these directly launched benchmark processes. Input sets:
+8 Canterbury text/code files (1,229,584 bytes), 128 frozen synthetic small files
+(42,258 bytes), and one 8 MiB synthetic incompressible control. The control is
+random data, not a representative sample of PDF, Office, photos or video.
+
+Creation time includes one integrity workflow: a separate 7z t for native
+outputs, and built-in decoded SHA-256 verification for ARCA. Timings include
+process startup and filesystem work; they are not isolated codec throughput.
+Extraction is timed separately; the common external SHA-256 comparison is
+recorded separately in the private raw results. ARCA ordered extraction returns
+the original root folder itself; the harness restores that prefix when comparing
+logical paths. An initial harness root-prefix mismatch was corrected without
+changing the product; the first three completed native cases were retained.
+
+Memory is the sampled Windows peak process working set reported by
+GetProcessMemoryInfo, including the runtime, not committed/virtual memory.
+Native CLI file ordering/metadata and ARCA ordering/metadata differ. There are
+no repeated-run confidence intervals, password cases or exhaustive tuning.
+Do not generalize the small size difference or the short timings to all inputs.
+
+On the small-file case, the encoded ARCA manifest occupies 6,249 of 26,765
+archive bytes (23.35%). This supports measuring metadata compression and
+codec-trial costs before changing the format. The wider A01 matrix remains open.
+Raw inventory, archives and measurements are retained privately under
+artifacts/fair-benchmark-2026-11-05; no original source corpus is published.
+
+</div>

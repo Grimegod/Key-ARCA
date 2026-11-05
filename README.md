@@ -1,3 +1,5 @@
+<div align="justify">
+
 # Key-ARCA 0.4.1
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
@@ -134,3 +136,5 @@ your profile choice when formats change. Smaller is optional and takes
 longer. Faster metadata checks preserve path/link protection and the
 selected-profile archive bytes. See the release notes and compression
 measurements for the synthetic test results and size/time tradeoffs.
+
+</div>

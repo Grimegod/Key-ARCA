@@ -1,3 +1,5 @@
+<div align="justify">
+
 # ARCA v1 — experimental format specification
 
 Key-ARCA 0.2 introduces an independent `.arca` container for exact file
@@ -161,3 +163,5 @@ Native codecs are resource-limited, not isolated in an OS security sandbox.
 
 The original ARCA implementation remains the owner's proprietary freeware source.
 Publishing this format description does not change the source-code license.
+
+</div>

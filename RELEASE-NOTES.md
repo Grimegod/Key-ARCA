@@ -1,3 +1,5 @@
+<div align="justify">
+
 # Key-ARCA 0.4.1 — original folder names and faster ARCA creation
 
 ## Fixes
@@ -91,3 +93,5 @@ remains proprietary and private. `SHA256SUMS.txt` contains both download hashes.
 See README.md and docs/ARCHIVE-TOOLS.md in the package for full instructions.
 
 Contact: [FFFNewsNow@gmail.com](mailto:FFFNewsNow@gmail.com).
+
+</div>
