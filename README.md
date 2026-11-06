@@ -1,19 +1,19 @@
 <div align="justify">
 
-# Key-ARCA 0.4.1
+# Key-ARCA 0.4.2
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download Key-ARCA 0.4.1 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.1/Key-ARCA-0.4.1-Setup-x64.exe)
+[Download Key-ARCA 0.4.2 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.2/Key-ARCA-0.4.2-Setup-x64.exe)
 
-Choose **Key-ARCA-0.4.1-Setup-x64.exe** for the installer, or use the
-[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.1/Key-ARCA-0.4.1-win-x64.zip).
+Choose **Key-ARCA-0.4.2-Setup-x64.exe** for the installer, or use the
+[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.4.2/Key-ARCA-0.4.2-win-x64.zip).
 Both include .NET; no Git, Visual Studio or separate runtime is required.
 
-1. Download and run **Key-ARCA-0.4.1-Setup-x64.exe** from the release Assets.
+1. Download and run **Key-ARCA-0.4.2-Setup-x64.exe** from the release Assets.
 2. Choose a dedicated application folder. Installation is per user without administrator access.
 3. Open Key-ARCA from the Start menu. A desktop shortcut is optional.
 
@@ -82,7 +82,7 @@ A detailed guide is included as `docs/ARCHIVE-TOOLS.md` in the Windows package.
 
 ## Preview status and limitations
 
-Version 0.4.1 is an **unsigned preview**. Windows may show a publisher or
+Version 0.4.2 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
 The application is now named **Key-ARCA**. Existing `.arca` archives keep their
@@ -136,5 +136,12 @@ your profile choice when formats change. Smaller is optional and takes
 longer. Faster metadata checks preserve path/link protection and the
 selected-profile archive bytes. See the release notes and compression
 measurements for the synthetic test results and size/time tradeoffs.
+
+## ARCA metadata improvement in 0.4.2
+
+Smaller tries denser metadata compression up to a 512 KiB manifest, keeping
+the smaller result. Other profiles keep their earlier metadata setting.
+ARCA v1 compatibility is preserved. This can save space at a processing
+cost; see COMPRESSION-BENCHMARKS.md for measured gains and losses to 7z.
 
 </div>

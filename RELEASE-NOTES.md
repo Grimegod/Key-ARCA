@@ -1,5 +1,32 @@
 <div align="justify">
 
+# Key-ARCA 0.4.2 — smaller ARCA metadata
+
+Smaller now tries stronger Brotli compression for manifests up to 512 KiB and
+keeps it only when it is smaller than the existing result. Larger manifests
+and the Balanced, Fast and Store profiles retain the previous metadata setting.
+Payload codec selection, JSON schema, encryption and ARCA container v1 are
+unchanged. The extra trial costs time; this is a size improvement, not a speedup.
+
+On frozen public text/code, the archive fell from 323,431 to 323,374 bytes.
+On 128 synthetic small files it fell from 26,765 to 25,896 bytes (3.25%). It
+remains larger than the smallest tested 7z: 322,164 and 22,478 bytes respectively.
+The incompressible control saves 276 bytes out of about 8 MiB. Full measurements,
+creation/extraction times, peak working set and limitations are in
+COMPRESSION-BENCHMARKS.md. No universal compression advantage is claimed.
+
+163/163 existing integration/security checks passed. New Smaller archives,
+plain and encrypted, restore exactly in 0.4.2 and the released 0.4.1 reader;
+wrong passwords and existing output archives are rejected. Existing v1
+fixtures, malformed metadata, limits and worker cancellation remain covered.
+The old README claim about an automatic Smaller default is corrected.
+
+Unsigned Windows x64 freeware preview; English plus ten interface languages.
+Original application source stays private. Contact: FFFNewsNow@gmail.com.
+Previous release assets and tags are not replaced.
+
+---
+
 # Key-ARCA 0.4.1 — original folder names and faster ARCA creation
 
 ## Fixes

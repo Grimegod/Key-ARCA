@@ -190,4 +190,50 @@ codec-trial costs before changing the format. The wider A01 matrix remains open.
 Raw inventory, archives and measurements are retained privately under
 artifacts/fair-benchmark-2026-11-05; no original source corpus is published.
 
+## Bounded metadata compression — 0.4.2, 6 November 2026
+
+This isolates one encoder setting, with the same frozen public/synthetic inputs
+as the 5 November baseline. The ZIP Deflate Ultra and optimized solid 7z
+LZMA2/PPMd measurements below are reused from that unchanged baseline; they
+were not rerun. ARCA 0.4.2 was measured today, with creation/integrity together
+and extraction separate. All outputs restored exact file paths and SHA-256,
+including extraction by the released 0.4.1 reader.
+
+| Dataset | ARCA 0.4.1 B | ARCA 0.4.2 B | Smallest tested 7z B | 0.4.2 vs 7z | Create + verify s | Extract s | Create / extract peak MiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | 323,431 | 323,374 | 322,164 | +0.38% | 3.2313 | 0.6671 | 100.3 / 84.4 |
+| synthetic-small-files | 26,765 | 25,896 | 22,478 | +15.21% | 1.2404 | 0.9025 | 64.7 / 56.2 |
+| incompressible-control | 8,391,558 | 8,391,282 | 8,389,342 | +0.02% | 12.7458 | 0.3772 | 265.4 / 60.0 |
+
+These are single end-to-end observations including process startup, not
+confidence intervals or isolated codec throughput. One compression thread;
+direct worker benchmark without GUI Job CPU/RAM caps. Peak process working
+set includes .NET and is not total committed/virtual memory. Source inventory
+and native baseline settings/verification are documented in the previous section.
+The initial 0.4.1 creation times were 3.0280, 1.1351 and 12.4734 seconds for
+the same three rows; 0.4.2 is not advertised as a creation-speed improvement.
+
+The research probe compressed each exact manifest three times (qualities
+6/9/11), verified decoded bytes and unchanged payload segments; quality 6
+reproduced the complete original archives. The first call includes cold/JIT
+cost. Quality 9 made three of five archives slightly larger and was rejected.
+Quality 11 reduced all five, but is slower. Median metadata-only times:
+
+| Fixture | Raw JSON B | Manifest q6 B | Manifest q11 B | q6 ms | q11 ms | q6 / q11 peak MiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | 2,709 | 1,126 | 1,069 | 0.70 | 3.58 | 27.2 / 27.3 |
+| synthetic-small-files | 28,842 | 6,249 | 5,380 | 1.52 | 33.79 | 26.8 / 26.9 |
+| incompressible-control | 5,841 | 2,822 | 2,546 | 1.10 | 7.34 | 42.8 / 43.1 |
+| Many.Small.Files | 442,737 | 97,586 | 80,673 | 11.61 | 538.63 | 29.3 / 38.2 |
+| Text.Code | 129,989 | 29,786 | 24,487 | 3.83 | 148.96 | 27.9 / 31.3 |
+
+The 2,000-small-file and 600-text-file metadata probes used frozen Balanced
+archives; their payloads are untouched research variants, not evidence of a
+new Balanced product result. The implementation applies the extra trial only
+to Smaller and caps the input at 512 KiB. It still tries quality 6 and retains
+it if quality 11 is not smaller. Larger manifests keep quality 6. This bound
+limits extra work, without promising a fixed latency on every computer.
+The wider matrix with edited Office/PDF documents and repeated end-to-end
+timings remains open. All fixtures are public or synthetic; none are personal.
+
 </div>

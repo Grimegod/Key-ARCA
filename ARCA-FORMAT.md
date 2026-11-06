@@ -164,4 +164,12 @@ Native codecs are resource-limited, not isolated in an OS security sandbox.
 The original ARCA implementation remains the owner's proprietary freeware source.
 Publishing this format description does not change the source-code license.
 
+## Writer metadata policy in 0.4.2
+
+The Smaller profile tries Brotli qualities 6 and 11 when manifest JSON is at
+most 512 KiB, retaining the smaller complete stream. All other profiles and
+larger manifests use quality 6. This is an encoder policy, not a schema or
+container revision. Released v1 readers accept either stream; encryption
+continues to authenticate the selected compressed bytes.
+
 </div>
