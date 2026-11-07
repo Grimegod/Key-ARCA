@@ -1,5 +1,21 @@
 <div align="justify">
 
+# Key-ARCA 0.6.0 — five additional interface languages
+
+Added Russian (Русский), Indonesian (Bahasa Indonesia), Polish (Polski),
+Turkish (Türkçe) and Korean (한국어), bringing the application to 16 interface
+languages. The new catalogs include dialogs, validation and error messages.
+English remains the first-run default. Existing language preferences are kept.
+
+All archive modes, encryption notices, split/join and recovery messages are
+translated. Archive formats and processing behavior are unchanged; ARCA v1
+remains experimental. Existing language preferences remain compatible.
+
+Translations are initial drafts, not a professional native-speaker review.
+Unsigned Windows x64 preview. Contact: FFFNewsNow@gmail.com.
+
+---
+
 # Key-ARCA 0.5.0 — an explicit Compact ARCA profile
 
 Choose ARCA and Compact to try Brotli quality 6, ultra LZMA2 and PPMd with a

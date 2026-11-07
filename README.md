@@ -1,19 +1,19 @@
 <div align="justify">
 
-# Key-ARCA 0.5.0
+# Key-ARCA 0.6.0
 
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
 ## Download
 
-[Download Key-ARCA 0.5.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.5.0/Key-ARCA-0.5.0-Setup-x64.exe)
+[Download Key-ARCA 0.6.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.6.0/Key-ARCA-0.6.0-Setup-x64.exe)
 
-Choose **Key-ARCA-0.5.0-Setup-x64.exe** for the installer, or use the
-[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.5.0/Key-ARCA-0.5.0-win-x64.zip).
+Choose **Key-ARCA-0.6.0-Setup-x64.exe** for the installer, or use the
+[portable ZIP](https://github.com/Grimegod/Key-ARCA/releases/download/v0.6.0/Key-ARCA-0.6.0-win-x64.zip).
 Both include .NET; no Git, Visual Studio or separate runtime is required.
 
-1. Download and run **Key-ARCA-0.5.0-Setup-x64.exe** from the release Assets.
+1. Download and run **Key-ARCA-0.6.0-Setup-x64.exe** from the release Assets.
 2. Choose a dedicated application folder. Installation is per user without administrator access.
 3. Open Key-ARCA from the Start menu. A desktop shortcut is optional.
 
@@ -43,7 +43,7 @@ website documentation. Use Setup or the Windows ZIP to get the application.
 - Unsafe archive paths, links, conflicting names and excessive expansion are blocked.
 - Configurable expanded-size limit: 2, 10, 20 or 50 GiB; 20 GiB is the default.
 - English default plus Romanian, Spanish, French, German, Portuguese, Italian,
-  Simplified Chinese, Japanese, Arabic and Hindi.
+  Simplified Chinese, Japanese, Arabic, Hindi, Russian, Indonesian, Polish, Turkish and Korean.
 - Your language choice is remembered per Windows user, including across portable updates and when the application folder is read-only. Existing portable language preferences are migrated.
 - Original archive-chest logo and optional subtle animations.
 
@@ -82,7 +82,7 @@ A detailed guide is included as `docs/ARCHIVE-TOOLS.md` in the Windows package.
 
 ## Preview status and limitations
 
-Version 0.5.0 is an **unsigned preview**. Windows may show a publisher or
+Version 0.6.0 is an **unsigned preview**. Windows may show a publisher or
 reputation warning; the application is not represented as digitally signed.
 
 The application is now named **Key-ARCA**. Existing `.arca` archives keep their
