@@ -5,6 +5,11 @@
 Freeware archiver for Windows 10/11 x64, with ZIP, 7z and experimental ARCA support.
 Free for personal, educational and commercial use. No ads, accounts or telemetry.
 
+[Website](https://grimegod.github.io/Key-ARCA/) ·
+[Prezentare în română](https://grimegod.github.io/Key-ARCA/ro.html) ·
+[Download SHA-256 checksums](https://grimegod.github.io/Key-ARCA/#download-hashes) ·
+[Encryption and security model](https://github.com/Grimegod/Key-ARCA/blob/main/SECURITY.md)
+
 ## Download
 
 [Download Key-ARCA 0.6.0 for Windows x64](https://github.com/Grimegod/Key-ARCA/releases/download/v0.6.0/Key-ARCA-0.6.0-Setup-x64.exe)
