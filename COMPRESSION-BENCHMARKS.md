@@ -236,4 +236,50 @@ limits extra work, without promising a fixed latency on every computer.
 The wider matrix with edited Office/PDF documents and repeated end-to-end
 timings remains open. All fixtures are public or synthetic; none are personal.
 
+## Compact profile — 7 November 2026, 0.5.0
+
+Four frozen public/synthetic fixtures, one end-to-end observation per profile.
+Creation includes process start and built-in decoded verification. Extraction
+is separate, followed by identical external SHA-256/path comparisons. All four
+Compact archives also restored exactly in released 0.4.2; an encrypted Compact
+case did too. One compression thread, direct workers without GUI Job caps.
+Peak working set includes runtime and is not committed/virtual memory.
+
+| Dataset | Input B | Smaller 0.4.2 B | Compact B | Smaller / Compact create+verify s | Smaller / Compact extract s | Smaller / Compact create peak MiB | Smaller / Compact extract peak MiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | 1,229,584 | 323,374 | 323,374 | 3.2382 / 1.2380 | 0.7423 / 0.6840 | 99.4 / 100.5 | 84.4 / 84.3 |
+| synthetic-small-files | 42,258 | 25,896 | 26,780 | 1.2668 / 1.5540 | 1.0144 / 1.0007 | 65.1 / 67.1 | 53.9 / 57.8 |
+| public-spreadsheet | 1,029,744 | 50,926 | 50,926 | 2.9369 / 0.8441 | 0.4201 / 0.4387 | 105.8 / 79.1 | 54.9 / 55.1 |
+| already-compressed | 785,443 | 670,413 | 670,413 | 2.6148 / 0.8088 | 0.4283 / 0.4140 | 82.2 / 82.2 | 56.4 / 56.3 |
+
+Compact saved creation time on three larger fixtures, with the same bytes.
+The small-file fixture was 3.41% larger and 22.67% slower in this observation;
+process startup and per-file work matter at this scale. Extraction and memory
+are not promised to improve. This is not a statistical throughput ranking.
+Smaller output for public text/code is byte-identical between 0.4.2 and 0.5.0.
+
+The codec-cost probe on exact released 0.4.2 segment bytes found Brotli quality
+11 took 1.78–2.38 seconds on the spreadsheet, compressed and text fixtures,
+while ultra XZ took 0.09–0.24 and PPMd 0.13–0.29 seconds. Brotli11 was not
+the size winner in those three probes. This motivated an explicit alternative,
+not removal of the strongest search. Small manifest compression remains bounded.
+
+Same-input native controls: ZIP Deflate ultra, solid 7z LZMA2 ultra/64 MiB,
+and solid 7z PPMd ultra, one compression thread, one integrity pass and a
+separate extraction with exact SHA-256. Text/small-file native baselines are
+reused from 5 November; spreadsheet/compressed controls were run today.
+
+| Dataset | ZIP B | 7z LZMA2 B | 7z PPMd B | Compact B |
+| --- | ---: | ---: | ---: | ---: |
+| public-text-code | 435,772 | 383,285 | 322,164 | 323,374 |
+| synthetic-small-files | 51,052 | 22,478 | 22,833 | 26,780 |
+| public-spreadsheet | 176,971 | 50,597 | 182,329 | 50,926 |
+| already-compressed | 674,038 | 669,924 | 692,926 | 670,413 |
+
+ARCA is larger than the smallest tested 7z in every row. The old Canterbury
+.xls is not representative of modern .xlsx. ZIP/PNG are already-compressed
+controls, not a representative edited Office/PDF corpus. Modern documents,
+repeat end-to-end timings and adaptive trial skipping remain future work.
+There are no personal documents in this evidence.
+
 </div>

@@ -1,5 +1,32 @@
 <div align="justify">
 
+# Key-ARCA 0.5.0 — an explicit Compact ARCA profile
+
+Choose ARCA and Compact to try Brotli quality 6, ultra LZMA2 and PPMd with a
+raw fallback. It avoids the costly quality-11 payload trial used by Smaller.
+Smaller remains available with its existing maximum-search policy. Balanced
+is still the initial profile; Compact is available only for ARCA.
+
+On four frozen public/synthetic fixtures, three archives kept the same size
+as Smaller and creation plus verification took 1.24 vs 3.24 seconds (text/code),
+0.84 vs 2.94 seconds (spreadsheet) and 0.81 vs 2.61 seconds (compressed files).
+The 128-small-file fixture was 884 bytes larger (3.41%) and slower in this
+single observation (1.55 vs 1.27 seconds). These are bounded examples, not
+a universal speed/size guarantee. Optimized 7z still wins several size controls.
+See COMPRESSION-BENCHMARKS.md for extraction times, memory and all comparisons.
+
+ARCA v1 is unchanged. Plain and encrypted Compact output restores exactly in
+the released 0.4.2 reader. A deterministic Smaller fixture remains byte-identical.
+167 integration and safety checks passed. Cancellation cleanup now retries
+brief transient file locks in its own staging folder; paths/links, bounds and
+no-overwrite protections remain in force. Explanatory application help uses
+Justify where supported, with translated profile guidance in all eleven languages.
+
+Unsigned Windows x64 freeware preview. Original application source stays
+private. Contact: FFFNewsNow@gmail.com. Earlier assets/tags are not replaced.
+
+---
+
 # Key-ARCA 0.4.2 — smaller ARCA metadata
 
 Smaller now tries stronger Brotli compression for manifests up to 512 KiB and

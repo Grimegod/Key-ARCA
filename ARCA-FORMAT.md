@@ -107,9 +107,12 @@ non-solid single-file container. It is only a segment inside the ARCA container.
 
 **Store** uses codec 0 while still deduplicating. **Fast** compares raw and
 Brotli quality 3. **Balanced** also compares XZ/LZMA2 normal with 16 MiB dictionary
-and uses Brotli quality 6. **Smaller** compares raw, Brotli quality 11,
+and uses Brotli quality 6. **Compact** compares raw, Brotli quality 6,
+XZ/LZMA2 ultra with 64 MiB dictionary and 7z/PPMd ultra. **Smaller** compares raw, Brotli quality 11,
 XZ/LZMA2 ultra with 64 MiB dictionary and 7z/PPMd ultra. Brotli window is 24.
-Manifest compression uses Brotli quality 6. Codec trials increase creation time;
+Manifest compression uses Brotli quality 6; Smaller (since 0.4.2) and Compact
+(since 0.5.0) also try quality 11 for manifests up to 512 KiB, keeping the
+smaller complete stream. Codec trials increase creation time;
 selection compares compressed payload size, not a predicted ratio.
 
 ## Optional encryption
@@ -167,9 +170,17 @@ Publishing this format description does not change the source-code license.
 ## Writer metadata policy in 0.4.2
 
 The Smaller profile tries Brotli qualities 6 and 11 when manifest JSON is at
-most 512 KiB, retaining the smaller complete stream. All other profiles and
+most 512 KiB, retaining the smaller complete stream. Compact uses this same
+bounded metadata policy from 0.5.0. All other profiles and
 larger manifests use quality 6. This is an encoder policy, not a schema or
 container revision. Released v1 readers accept either stream; encryption
 continues to authenticate the selected compressed bytes.
+
+## Compact encoder policy in 0.5.0
+
+Compact changes the payload Brotli quality from Smaller's 11 to 6 and keeps
+the same ultra native candidates and raw fallback. It does not skip candidates
+based on file names or a sample. Codec IDs, manifest schema, encryption and
+v1 reader validation remain unchanged. Smaller's payload policy is retained.
 
 </div>
