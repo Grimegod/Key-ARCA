@@ -282,4 +282,81 @@ controls, not a representative edited Office/PDF corpus. Modern documents,
 repeat end-to-end timings and adaptive trial skipping remain future work.
 There are no personal documents in this evidence.
 
+## Modern-document controls and repeated text observations — 8 November 2026
+
+Measured with released Key-ARCA 0.6.0; no codec, parser, encryption or archive
+format change is included in this review. The 0.6.0 language release retains
+the 0.5.0 Compact/Smaller policies. The public-text fixture contains eight
+frozen Canterbury text/code files (1,229,584 bytes). The document control has
+18 synthetic containers (173,351 bytes): six DOCX, six XLSX and six PDF, in
+three pairs of related revisions. OOXML ZIP/XML and PDF stream/xref structures
+are checked, but these are compression controls, not Office rendering tests
+or representative business documents. No personal files were used.
+
+ZIP Deflate Ultra, solid 7z LZMA2 Ultra with a 64 MiB dictionary and solid 7z
+PPMd Ultra use the bundled 26.05 command-line engine and one compression thread.
+Creation includes process startup and one native integrity check or ARCA's
+built-in decoded SHA-256 verification. Extraction is separate; identical
+external path/file SHA-256 comparisons follow for every method. Internal
+integrity algorithms and runtime overhead differ. Native timestamps are fixed
+to 2000-01-01. Native container metadata can differ from earlier measurements;
+use the same-day rows below for a size comparison.
+
+All fourteen workflows restored exactly and took 24.015 seconds in total.
+Compact/Smaller on public text were observed three times each; every other
+method/dataset has one observation. No confidence interval or broad throughput
+ranking is implied. Direct workers were used, without GUI Job CPU/RAM caps.
+Peak process working set includes the runtime, not committed/virtual memory.
+
+| Dataset | Method | Trial | Archive B | Create + verify s | Extract s | Create peak MiB | Extract peak MiB |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | zip-deflate-ultra | 1 | 435,772 | 1.0386 | 0.0931 | 9.75 | 7.96 |
+| public-text-code | 7z-lzma2-64m | 1 | 383,264 | 0.4665 | 0.0934 | 23.69 | 9.08 |
+| public-text-code | 7z-ppmd | 1 | 322,142 | 0.5248 | 0.2945 | 39.27 | 38.35 |
+| public-text-code | arca-compact | 1 | 323,374 | 1.3356 | 0.7014 | 100.33 | 84.45 |
+| public-text-code | arca-compact | 2 | 323,374 | 1.2029 | 0.6579 | 100.43 | 84.31 |
+| public-text-code | arca-compact | 3 | 323,374 | 1.1936 | 0.6534 | 100.23 | 84.54 |
+| public-text-code | arca-smaller | 1 | 323,374 | 3.1121 | 0.7037 | 99.86 | 84.34 |
+| public-text-code | arca-smaller | 2 | 323,374 | 3.1529 | 0.7018 | 100.66 | 84.44 |
+| public-text-code | arca-smaller | 3 | 323,374 | 3.3216 | 0.6743 | 100.18 | 84.18 |
+| synthetic-office-pdf | zip-deflate-ultra | 1 | 164,148 | 0.1462 | 0.1017 | 8.54 | 7.77 |
+| synthetic-office-pdf | 7z-lzma2-64m | 1 | 147,152 | 0.1155 | 0.1095 | 11.17 | 8.03 |
+| synthetic-office-pdf | 7z-ppmd | 1 | 149,133 | 0.1903 | 0.1557 | 12.41 | 11.62 |
+| synthetic-office-pdf | arca-compact | 1 | 147,966 | 0.6949 | 0.5573 | 65.25 | 55.16 |
+| synthetic-office-pdf | arca-smaller | 1 | 147,097 | 1.1433 | 0.4771 | 66.05 | 52.53 |
+
+The public-text median create+verify time was 1.2029 s for Compact and
+3.1529 s for Smaller (61.85% less time), at the same 323,374-byte
+archive size. Both are larger than this run's smallest 7z/PPMd (322,142 B),
+and neither beats its time or process working set in these observations.
+Their complete archive SHA-256 also matches the frozen 0.5.0 text fixture,
+not merely the output size; this is not a new compression gain in 0.6.0.
+
+On the synthetic document control, Smaller is 147,097 B, Compact 147,966 B,
+and the smallest tested 7z is 147,152 B. Smaller's 55-byte advantage over 7z
+is only 0.0374%, too small and too fixture-specific for a general claim.
+Compact is 869 B larger than Smaller and took 0.6949 vs 1.1433 s to create
+and verify. Native 7z LZMA2 took 0.1155 s and about 11.17 MiB peak working set,
+versus 0.6949 s and 65.25 MiB for Compact. Extraction observations also favor
+native 7z here. These losses are retained rather than hidden by the small
+size win. Related synthetic revisions can exaggerate reusable content.
+
+The q11 payload trial can still win on this control; this evidence does not
+justify removing it from Smaller or an automatic skip rule for Office/PDF.
+The existing explicit profiles remain unchanged. The next useful measurement
+is a broader independently authored public Office/PDF corpus with recorded
+provenance, followed by bounded candidate-level cost probes if justified.
+
+Reproduce locally with tools/review_document_controls.py --output
+artifacts/document-controls-reproduction (a new folder is required). The
+generator seed and inner-container timestamps are fixed. It freezes an input
+inventory and preserves all output archives, per-trial timings and restored
+hash comparisons privately; it does not overwrite earlier results.
+
+Input inventory SHA-256: `657cd0e60896aeaeee0747a00bf9d46165fa2ab3ad7e3317424062a8f692394a`.
+
+Application Core 0.6.0 SHA-256: `eb09b3558a4a085aedad2578a2a86743e268b1b4bab9742f52abf8440fccd6a1`.
+
+Native command-line engine SHA-256: `94205cfc054dd3bbeb978905bc619a65b3f04e9e73bb2717841110b6f46d962e`.
+
 </div>
