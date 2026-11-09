@@ -359,4 +359,105 @@ Application Core 0.6.0 SHA-256: `eb09b3558a4a085aedad2578a2a86743e268b1b4bab9742
 
 Native command-line engine SHA-256: `94205cfc054dd3bbeb978905bc619a65b3f04e9e73bb2717841110b6f46d962e`.
 
+## Segment lifetime experiment — 9 November 2026
+
+Released application 0.6.0 was compared on the same frozen public text/code
+files and a new deterministic synthetic control: 80 unrelated structured-text
+files of 256 KiB each, exactly 20 MiB. Names, bytes and timestamps are fixed.
+The synthetic data is not a representative business-document corpus. Each
+method restored exactly the same paths and SHA-256 hashes.
+
+Eight baseline workflows used ZIP Deflate Ultra, solid 7z LZMA2 Ultra/64 MiB,
+solid 7z PPMd Ultra and ARCA Compact. Native methods use one compression
+thread. Creation includes process startup and an integrity pass (native CRC
+or ARCA decoded hashes); extraction is separate. Verification internals differ,
+so this is an end-to-end observation, not isolated compressor throughput.
+Peak process working set includes runtime and is not virtual/committed memory.
+Workers run directly without the GUI Job CPU/memory caps. Baselines have one
+observation per method; no broad statistical ranking is claimed.
+
+| Dataset | Method | Archive B | Create + verify s | Extract s | Create peak MiB | Extract peak MiB |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| public-text-code | zip-deflate-ultra | 435772 | 1.1442 | 0.0981 | 10.51 | 8.74 |
+| public-text-code | 7z-lzma2-64m | 383264 | 0.5566 | 0.1039 | 24.50 | 10.04 |
+| public-text-code | 7z-ppmd | 322142 | 0.5288 | 0.3182 | 40.05 | 39.13 |
+| public-text-code | arca-compact | 323374 | 1.4645 | 0.6926 | 99.23 | 84.41 |
+| synthetic-sequential-text | zip-deflate-ultra | 5335111 | 13.1482 | 0.2245 | 14.26 | 8.70 |
+| synthetic-sequential-text | 7z-lzma2-64m | 4682555 | 12.7321 | 0.3895 | 253.98 | 29.47 |
+| synthetic-sequential-text | 7z-ppmd | 4886148 | 9.1698 | 5.1018 | 266.47 | 265.51 |
+| synthetic-sequential-text | arca-compact | 4738827 | 10.6134 | 1.2430 | 221.33 | 84.08 |
+
+ARCA Compact is larger than the smallest tested 7z on both controls: 1,232 B
+on public text/code and 56,272 B on the 20 MiB synthetic set (about 1.20%).
+On the synthetic set it uses less creation time/memory than the tested LZMA2
+settings, but extraction is slower and uses more memory. PPMd has a different
+size/time/memory tradeoff. These observations are not universal format claims.
+
+### Reader candidate rejected: lower cache liveness did not lower measured peak
+
+The released reader has an LRU cache of up to four decoded 8 MiB segments.
+The synthetic archive has three segments (8, 8 and 4 MiB). A manifest-based
+lifetime model predicts 20 MiB of live cached raw arrays with the current
+policy and at most 8 MiB if each array is released after its final reference.
+This is a simulation of referenced buffers, not a working-set measurement.
+
+A private candidate counted all references, including deduplication across
+files, and removed a segment after its final use. It retained the existing
+four-entry LRU bound and plaintext clearing for encrypted buffers. Its only
+measured comparison here is plain-archive extraction; encrypted/malformed-input
+release validation was not performed because the performance experiment failed
+the benefit criterion. It was not published or accepted as a product change.
+
+Three interleaved released/candidate observations per dataset restored exactly
+the same archives and hashes. The observed medians are:
+
+| Dataset | Build | Median extraction s | Median process peak MiB | Observations |
+| --- | --- | ---: | ---: | ---: |
+| public-text-code | released-0.6.0 | 0.6765 | 84.262 | 3 |
+| public-text-code | candidate | 0.6982 | 84.363 | 3 |
+| synthetic-sequential-text | released-0.6.0 | 1.2475 | 84.125 | 3 |
+| synthetic-sequential-text | candidate | 1.2795 | 84.000 | 3 |
+
+The synthetic peak changes only from about 84.125 to 84.000 MiB (0.15%),
+while the time median rises from 1.2475 to 1.2795 seconds (2.57%). Public
+text/code also has no memory improvement, with a slightly higher time median.
+These small observations do not establish a general slowdown, but they do not
+demonstrate the intended practical memory saving. Referenced-array liveness
+must not be reported as an equivalent resident-memory improvement. Further
+allocation/native-decoder profiling would need a separate bounded hypothesis.
+
+All twelve extraction observations, including unfavorable results:
+
+| Dataset | Build | Observation | Extract s | Process peak MiB |
+| --- | --- | ---: | ---: | ---: |
+| public-text-code | released-0.6.0 | 1 | 0.7420 | 84.262 |
+| public-text-code | candidate | 1 | 0.8440 | 84.902 |
+| public-text-code | released-0.6.0 | 2 | 0.6765 | 84.422 |
+| public-text-code | candidate | 2 | 0.6982 | 84.344 |
+| public-text-code | released-0.6.0 | 3 | 0.6757 | 83.992 |
+| public-text-code | candidate | 3 | 0.6960 | 84.363 |
+| synthetic-sequential-text | released-0.6.0 | 1 | 1.2327 | 84.125 |
+| synthetic-sequential-text | candidate | 1 | 1.2697 | 83.914 |
+| synthetic-sequential-text | released-0.6.0 | 2 | 1.3144 | 84.945 |
+| synthetic-sequential-text | candidate | 2 | 1.2828 | 84.055 |
+| synthetic-sequential-text | released-0.6.0 | 3 | 1.2475 | 83.922 |
+| synthetic-sequential-text | candidate | 3 | 1.2795 | 84.000 |
+
+Decision: reject the candidate and restore the reader source byte for byte.
+The application remains 0.6.0 with the existing experimental ARCA v1 format,
+codec policies and protections. No new binary, installer or release tag was
+created. Existing releases are unchanged. The reusable bounded measurement
+tool and this report are the accepted tooling/documentation improvement.
+
+Private evidence: artifacts/daily-reviews/2026-11-09-segment-lifetime/
+(baseline.json, candidate-results.json, input-inventory.json and output hashes).
+Reproduce with tools/review_segment_lifetime.py --output artifacts/segment-lifetime-reproduction,
+using a new artifact directory. The candidate is retained only as private
+rejected experimental evidence and is not an end-user package.
+
+Input inventory SHA-256: `fabfd948a6e993580c75a8df279f55f8d573665c9acbaa05d8b77efb9086f0eb`.
+
+No personal files, original application source, credentials or owner backups
+are included in this public document.
+
 </div>
